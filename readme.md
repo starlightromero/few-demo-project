@@ -22,6 +22,7 @@ This is demo app to give an idea of the kinds of code and programming involved w
       - #contanier round corner
       - .button round corner changes colors
       - .button:hover change colors 
+      - add a box shadow to player
     - Change game images used as game elements 
       - --player-image
       - --bg-image
