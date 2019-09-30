@@ -2,6 +2,8 @@
 
 This is demo app to give an idea of the kinds of code and programming involved with programming web applications. 
 
+View the game live [here](https://make-school-labs.github.io/few-track-demo/). 
+
 ## Todo - 
 
 1. Some tasks to explore programming on the web.
