@@ -1,0 +1,143 @@
+:root {
+  --button-color: #fff; 
+  --transition-time: 400ms;
+	--min-xy: calc(-100px - 0px);
+  --max-xy: calc(500px + 32px);
+  
+  --player-image: url(./images/pink-default.gif);
+  --bg-image: url(./images/wall-2.png);
+  --bomb-image: url(./images/bomb-default.gif);
+  --fruit-apple: url(./images/apple.png);
+  --fruit-strawberry: url(./images/strawberry.png);
+  --fruit-lemon: url(./images/lemon.png);
+}
+
+body, html {
+  height: 100%; 
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+body {
+  background-color: #ddd;
+  color: #444;
+  font-family: Helvetica;
+}
+
+#container {
+  --x: 0;
+  --y: 0;
+  
+  position: relative;
+  height: 500px;
+  width: 500px;
+  border: solid 2px #666;
+  background-image: var(--bg-image);
+  background-position: calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px);
+  transition: var(--transition-time);
+  /*	overflow: hidden;*/
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coords {
+  color: var(--button-color);
+  font-size: 1.5em;
+  margin: 5px;
+}
+
+#sprite {
+  --x: 0;
+  --y: 0;
+  --direction: 1;
+  
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 64px;
+  background-color: transparent;
+  background-image: var();
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: 
+    translateX(calc(var(--x, 0) * 1px))
+    translateY(calc(var(--y, 0) * 1px))
+    scaleX(var(--direction)); 
+  /* transition: var(--transition-time); */
+}
+
+.button {
+  --text-color: #ddd;
+  --size: 64;
+  color: var(--button-color);
+  border-radius: 50%;
+  width: calc(var(--size) * 1px);
+  height: calc(var(--size) * 1px);
+  border: solid 4px var(--button-color);
+  text-align: center;
+  line-height: calc(var(--size) * 1px); 
+  margin: 5px;
+  transition: 200ms;
+  box-shadow: 0 0 0 var(--button-color) inset;
+}
+
+.button:hover {
+/*  background-color: var(--button-color);*/
+  box-shadow: 0 0 80px var(--button-color) inset;
+  color: var(--text-color); 
+}
+
+.bomb {
+	width: 64px;
+	height: 64px;
+	background-image: url(./images/bomb-default.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+}
+
+.strawberry { background-image: url(./images/strawberry.png); }
+.lemon { background-image: url(./images/lemon.png); }
+.apple { background-image: url(./images/apple.png); }
+
+.strawberry, .lemon, .apple, .fruit {
+  width: 64px;
+	height: 64px;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+}
+
+.explosion {
+  width: 128px;
+  height: 128px;
+  background-repeat: no-repeat;
+	background-position: center;
+  position: absolute;
+  background-image: url(./images/explosion-1.gif);
+}
+
+.explosion-sparkly {
+  width: 128px;
+  height: 128px;
+  background-repeat: no-repeat;
+	background-position: center;
+  position: absolute;
+  background-image: url(./images/explosion-3.gif);
+}
