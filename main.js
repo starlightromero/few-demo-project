@@ -25,12 +25,14 @@ let x = xyOffset
 let y = xyOffset
 let targetX = x 
 let targetY = y
-const minX = xyOffset
-const maxX = xyOffset + (100 * 3)
-const minY = xyOffset
-const maxY = xyOffset + (100 * 3)
+const minX = xyOffset - 100
+const maxX = xyOffset + (100 * 4)
+const minY = xyOffset - 100
+const maxY = xyOffset + (100 * 4)
 let direction = 1
 
+const timePerBomb = 3000
+const timePerFruit = 1000
 
 function moveSprite() {
   x -= (x - targetX) * 0.1
@@ -38,7 +40,7 @@ function moveSprite() {
   y -= (y - targetY) * 0.1
   sprite.style.setProperty('--y', y)
 }
-  
+
 function updateCoords() {
   // coords.innerHTML = `X:${x.toFixed(1)} Y:${y.toFixed(1)}`
 }
@@ -118,11 +120,9 @@ function random(range) {
 }
   
 const bombs = []
-const types = ['bomb', 'apple', 'lemon', 'strawberry']
 
-function makeBomb() {
+function makeBomb(type) {
   const el = document.createElement('div')
-  const type = types[random(types.length)]
   el.classList.add(type)
   container.appendChild(el)
 
@@ -206,8 +206,14 @@ function makeSparklyExplosion(x, y) {
 } 
   
 setInterval(function() {
-  makeBomb()
-}, 2000)
+  makeBomb('bomb')
+}, timePerBomb)
+
+setInterval(function() {
+  const types = ['apple', 'lemon', 'strawberry']
+  const type = types[random(types.length)]
+  makeBomb(type)
+}, timePerFruit)
 
 makeBomb()
 
