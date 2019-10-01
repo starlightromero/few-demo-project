@@ -32,6 +32,7 @@ const minY = xyOffset - 100
 const maxY = xyOffset + (100 * 4)
 let direction = 1
 
+// These control how often bombs and fruits spawn
 const timePerBomb = 3000
 const timePerFruit = 1000
 
@@ -174,7 +175,8 @@ function makeObject(type) {
   new_object.style.top = `${y}px`
 
   // makes the bombs faster than the other elements
-  dx = type === 'bomb' ? dx * 3 : dx * 1
+  //the 3 is the speed of the bombs, and the 1 is the speed of the fruits
+  dx = type === 'bomb' ? dx * 3 : dx * 1 
   dy = type === 'bomb' ? dy * 3 : dy * 1
 
   // creates the object object and addsd it to the array
