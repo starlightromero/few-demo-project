@@ -31,8 +31,8 @@ const minY = xyOffset - 100
 const maxY = xyOffset + (100 * 4)
 let direction = 1
 
-const timePerBomb = 3000
-const timePerFruit = 1000
+const timePerBomb = 1000
+const timePerFruit = 3000
 
 function moveSprite() {
   x -= (x - targetX) * 0.1
