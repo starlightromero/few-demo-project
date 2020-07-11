@@ -333,4 +333,3 @@ function onFrame() {
 
 // Calls our game loop to start the whole thing
 requestAnimationFrame(onFrame)
-
