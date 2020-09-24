@@ -15,19 +15,19 @@ const sprite = document.getElementById('sprite')
 const coords = document.getElementById('coords')
 const game_screen = document.getElementById('game-screen')
 const scoreCard = document.getElementById('score-card')
-  
+
 // ------------------------------------------------
 // --                 Variables                  --
-// Here we are initializing all of the variables we will be 
-// using in the rest code. 
+// Here we are initializing all of the variables we will be
+// using in the rest code.
 
-const xyOffset = 64;
+const xyOffset = 64
 
 let score = 0
 
 let player_x = xyOffset
 let player_y = xyOffset
-let targetX = player_x 
+let targetX = player_x
 let targetY = player_y
 const minX = xyOffset - 100
 const maxX = xyOffset + (100 * 4)
@@ -37,94 +37,93 @@ let direction = 1
 
 // These control how often bombs and fruits spawn
 
-const timePerBomb = 3000
-const timePerFruit = 1000
-
+const timePerBomb = 2000
+const timePerFruit = 800
 
 // -------------------------------------------------
 // --                 Functions                   --
 
-// This is function alters the css properties of the player 
+// This is function alters the css properties of the player
 // sprite to make it move.
 
-function moveSprite() {
+function moveSprite () {
   player_x -= (player_x - targetX) * 0.1
   sprite.style.setProperty('--x', player_x)
   player_y -= (player_y - targetY) * 0.1
   sprite.style.setProperty('--y', player_y)
 }
 
-// This function updates the css properties on the background to 
-// move it along with the player sprite.  
+// This function updates the css properties on the background to
+// move it along with the player sprite.
 
-function updateBackground() {
+function updateBackground () {
   game_screen.style.setProperty('--x', player_x / -1)
   game_screen.style.setProperty('--y', player_y / -1)
 }
 
-// All of the move functions updated the "targetX" or "targetY" 
-// variables which we use to update where the player is. and then 
+// All of the move functions updated the "targetX" or "targetY"
+// variables which we use to update where the player is. and then
 // tells the background to move
 
-function moveLeft() {
+function moveLeft () {
   if (targetX > minX) {
     targetX -= 100
     updateBackground()
   }
 }
 
-function moveRight() {
+function moveRight () {
   if (targetX < maxX) {
     targetX += 100
     updateBackground()
   }
 }
 
-function moveUp() {
+function moveUp () {
   if (targetY > minY) {
     targetY -= 100
     updateBackground()
   }
 }
 
-function moveDown() {
+function moveDown () {
   if (targetY < maxY) {
     targetY += 100
     updateBackground()
   }
 }
-  
+
 // -- Controls --
 
-// these next few set the "onclick" listener of the buttons to 
+// these next few set the "onclick" listener of the buttons to
 // call their respective move function
 
-left_btn.onclick = function(e) {
+left_btn.onclick = function (e) {
   moveLeft()
 }
-  
-right_btn.onclick = function(e) {
+
+right_btn.onclick = function (e) {
   moveRight()
 }
-  
-up_btn.onclick = function(e) {
+
+up_btn.onclick = function (e) {
   moveUp()
 }
-  
-down_btn.onclick = function(e) {
+
+down_btn.onclick = function (e) {
   moveDown()
 }
 
 // -- Listen for keyboard events --
 
-// this is setting the "onkeydown" event listener to check if 
-// one of the arrow keys have been pressed, and calls the 
+// this is setting the "onkeydown" event listener to check if
+// one of the arrow keys have been pressed, and calls the
 // correct move function.
 
-document.onkeydown = function(e) {
+document.onkeydown = function (e) {
   const { code } = e
-  switch(code) {
-    case 'ArrowLeft': 
+  switch (code) {
+    case 'ArrowLeft':
       moveLeft()
       break
     case 'ArrowRight':
@@ -138,23 +137,23 @@ document.onkeydown = function(e) {
       break
   }
 }
- 
+
 // this just gives us a cleaner function to get a random integer
 
-function random(range) {
+function random (range) {
   return Math.floor(Math.random() * range)
 }
- 
-// This will be a list of all of the objects on screen other 
+
+// This will be a list of all of the objects on screen other
 // than the player
 
 const objects = []
 
-// this function creates a new object and adds it to the 
+// this function creates a new object and adds it to the
 // objects list
 
-function makeObject(type) {
-  // Creates a new div that will be our object, but doesn't 
+function makeObject (type) {
+  // Creates a new div that will be our object, but doesn't
   // actually put it on the page
   const new_object = document.createElement('div')
   // Adds a class to our new div
@@ -167,9 +166,9 @@ function makeObject(type) {
   let y = 0
   let dx = 0
   let dy = 0
-  
+
   // Randomly defines where the object starts
-  switch(random(4)) {
+  switch (random(4)) {
     case 0: // top
       x = randomXY
       y = -100
@@ -204,14 +203,14 @@ function makeObject(type) {
 
   // Makes the bombs move faster than the other elements
   // the 3 is the speed of the bombs, and the 1 is the speed of the fruits
-  dx = type === 'bomb' ? dx * 3 : dx * 1 
+  dx = type === 'bomb' ? dx * 3 : dx * 1
   dy = type === 'bomb' ? dy * 3 : dy * 1
 
   // creates the object object and addsd it to the array
   const object = {
     new_object,
     x, y,
-    dx, dy, 
+    dx, dy,
     type
   }
 
@@ -220,7 +219,7 @@ function makeObject(type) {
 
 // Creates a new div where the bomb was and playes the explosion animation
 
-function makeExplosion(x, y) {
+function makeExplosion (x, y) {
   const new_explosion = document.createElement('div')
   game_screen.appendChild(new_explosion)
   new_explosion.classList.add('explosion')
@@ -233,10 +232,10 @@ function makeExplosion(x, y) {
   }, 1000)
 }
 
-// Does the same thing as the makeExplosion function, but with a 
+// Does the same thing as the makeExplosion function, but with a
 // different animation
 
-function makeSparklyExplosion(x, y) {
+function makeSparklyExplosion (x, y) {
   const new_sparkly_explosion = document.createElement('div')
   game_screen.appendChild(new_sparkly_explosion)
   new_sparkly_explosion.classList.add('explosion-sparkly')
@@ -246,11 +245,11 @@ function makeSparklyExplosion(x, y) {
   setTimeout(() => {
     new_sparkly_explosion.parentNode.removeChild(new_sparkly_explosion)
   }, 1000)
-} 
+}
 
 // This checks to see if the 2 objects passed in are colliding
 
-function checkForCollision(object_a, object_b) {
+function checkForCollision (object_a, object_b) {
   const dx = Math.abs(object_a.x - object_b.x)
   const dy = Math.abs(object_a.y - object_b.y)
   const offset = xyOffset / 1
@@ -262,20 +261,19 @@ function checkForCollision(object_a, object_b) {
   return false
 }
 
-
 // -- Create Objects --
 
-// This will create a new bomb on repeat with a delay we 
+// This will create a new bomb on repeat with a delay we
 // set at the top of the code
 
-setInterval(function() {
+setInterval(function () {
   makeObject('bomb')
 }, timePerBomb)
 
-// This will create a new fruit on repeat with a delay we set 
+// This will create a new fruit on repeat with a delay we set
 // at the top of the code
 
-setInterval(function() {
+setInterval(function () {
   const types = ['apple', 'lemon', 'strawberry']
   const type = types[random(types.length)]
   makeObject(type)
@@ -283,17 +281,16 @@ setInterval(function() {
 
 makeObject()
 
-
 // -- Game Loop --
 
 // This is our game loop, all of the game logic happens here
 
-function onFrame() {
+function onFrame () {
   // This moves the sprite to where it is supposed to be
   moveSprite()
 
-  // this loops through the objects array and updates each objects 
-  // position so they keep moving it also checks to see if any 
+  // this loops through the objects array and updates each objects
+  // position so they keep moving it also checks to see if any
   // objects are colliding with the player
 
   objects.forEach((object, i, arr) => {
@@ -326,7 +323,7 @@ function onFrame() {
       arr.splice(i, 1)
     }
   })
-  // This calls the game loop again on "animation frame" which 
+  // This calls the game loop again on "animation frame" which
   // waits until your browser can update whats on screen
   requestAnimationFrame(onFrame)
 }
